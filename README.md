@@ -1,7 +1,7 @@
 # chat-TFG
 Aplicación desarrollada para el proyecto de trabajo de fin de grado para la Escuela Superior de Ingeniería Informática, en la Universidad de Vigo.
 ``Autor: Daniel Gómez Rodríguez``
-``Fecha: 25-12-2021``
+``Fecha: 26-07-2022``
 
 ## Descripción
 Esta aplicación ofrece un servicio de mensajería instantánea, similar a WhatsApp o Telegram. El servidor provee tanto del servicio como de la interfaz, por lo que no es necesario instalar ninguna aplicación ni software para su uso (de cara al usuario final).
