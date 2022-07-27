@@ -38,11 +38,10 @@ app.set("port", port);
 // middleware para Cross-Origin Resource Sharing (para solicitar recursos dende un dominio distinto ao recurso)
 // actualmente está configurado para aceptar calquer orixe.
 var corsOptions = {
-  "origin": ["http://localhost:8080", "http://192.168.1.27:8080" , "http://localhost:8081"],
-  //"origin": "*",
+  "origin": '*',
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
-  "optionsSuccessStatus": 200
+  "optionsSuccessStatus": 200,
 };
 
 // engadir logger
@@ -87,8 +86,8 @@ const server = http.createServer(app);
 // Crease unha instancia de Socket.IO
 global.io = new Server(server, {
   cors: {
-    //origin: ["http://localhost:8081", "http://192.168." + RegExp("[0-9]{1,3}") + "." + RegExp("[0-9]{1,3}") + ":8081"],
-    origin: ["*"],
+    origin: '*',
+    //origin: ["*"],
     methods: ["GET", "POST"]
   }
   });
