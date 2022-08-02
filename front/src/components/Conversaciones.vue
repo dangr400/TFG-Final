@@ -110,7 +110,6 @@ export default {
             GruposService.getGrupos()
                 .then(response => {
                 this.grupos = response.data;
-                console.log(response.data);
                 })
                 .catch(e => {
                 console.log(e);
@@ -121,7 +120,6 @@ export default {
             UserService.getContactos()
                 .then(response => {
                 this.usuarios = response.data.contactos;
-                console.log(response.data);
                 })
                 .catch(e => {
                 console.log(e);
@@ -129,10 +127,8 @@ export default {
         },
 
         iniciarChatGrupo(grupo) {
-          console.log(grupo);
           ChatService.iniciarChatGrupo(grupo)
           .then(response => {
-            console.log(response);
             const idSala = response.data.chatRoom.chatRoomId;
             this.$router.push({path: `/chat/${idSala}`})
             })
@@ -145,7 +141,6 @@ export default {
           console.log(usuario);
           ChatService.iniciarChatUsuarios(usuario)
           .then(response => {
-            console.log(response);
             const idSala = response.data.chatRoom.chatRoomId;
             this.$router.push({path: `/chat/${idSala}`})
             })

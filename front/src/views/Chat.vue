@@ -13,7 +13,7 @@
                     v-for="(user, index) in users"
                     :key="index"
                 >
-                    <strong> {{user.nome_usuario}} </strong>
+                    <strong> {{user.nome_usuario}} <span v-if="esUsr(user)">(Eu)</span> </strong>
                 </li>
             </ul>
         </div>
@@ -54,6 +54,9 @@ export default {
         MessagePanel
     },
     methods: {
+        esUsr(usuario){
+            return usuario.nome_usuario === this.$store.state.auth.user.nome_usuario
+        },
         getSala(idSala) {
             ChatService.getConversacion(idSala)
             .then(response => {
@@ -70,7 +73,6 @@ export default {
             })
             .catch(error => {
                 console.log(error);
-                //this.$router.go(-1);
             })
         },
         onMessage(content) {

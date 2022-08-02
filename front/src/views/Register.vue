@@ -24,7 +24,11 @@
             <label for="password">Contrasinal</label>
             <Field name="password" type="password" class="form-control" />
             <ErrorMessage name="password" class="error-feedback alert-danger" />
+            <label for="password2">Repita o Contrasinal</label>
+            <Field name="password2" type="password" class="form-control" />
+            <ErrorMessage name="password2" class="error-feedback alert-danger" />
           </div>
+
 
           <div class="form-group">
             <button class="btn btn-primary btn-block" :disabled="loading">
@@ -72,6 +76,12 @@ export default {
         .required("CAMPO OBRIGATORIO")
         .min(3, "DEBE TER MÁIS DE 3 CARACTERES")
         .max(20, "NON DEBE PASAR OS 30 CARACTERES"),
+      password2: yup
+        .string()
+        .required("CAMPO OBRIGATORIO")
+        .min(3, "DEBE TER MÁIS DE 3 CARACTERES")
+        .max(20, "NON DEBE PASAR OS 30 CARACTERES")
+        .oneOf([yup.ref('password'), null], 'Non coincide co contrasinal introducido'),
     });
 
     return {

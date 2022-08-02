@@ -22,7 +22,7 @@ export default {
       datos:{
         "cabecera": "",
         "menus": ["Qué é isto?","Para quén está deseñado","Documentación"],
-        "saludos": ["Hola","Ola","Bojour","Hello","Gütten","Ni Hao"],
+        "saludos": ["Hola","Ola","Bojour","Hello","Gütten","Nǐ hǎo"],
         "content": "",
       },
       

@@ -109,7 +109,6 @@ export default {
   methods: {
 
     modificarDatosUsuario() {
-      console.log(this.datosUsuario);
       UserService.updateUsuario(this.datosUsuario)
         .then(response =>{
           if (response.status < 400) {

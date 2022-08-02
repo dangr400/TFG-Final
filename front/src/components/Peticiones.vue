@@ -15,12 +15,12 @@
       </div>
     </div>
     <div
-            v-if="message"
-            class="container alert"
-            :class="successful ? 'alert-success' : 'alert-danger'"
-            >
-                    {{ message }}
-          </div>
+      v-if="message"
+      class="container alert"
+      :class="successful ? 'alert-success' : 'alert-danger'"
+      >
+              {{ message }}
+    </div>
     <div class="container">
         <h3>
         <strong>Peticións de Contacto</strong>
@@ -92,7 +92,6 @@ export default {
       UserService.getPeticionesPendientes()
         .then(response => {
           this.peticiones = response.data.peticiones;
-          console.log(response.data);
         })
         .catch(e => {
           console.log(e);
@@ -107,15 +106,18 @@ export default {
           this.message = response.data.message;
           this.mensajeEnviarPeticion = true;
           this.successful = response.data.success;
-          setTimeout(() => {
+        })
+        .catch(e => {
+          this.nombreUsrPeticion = "";
+          this.mensajeEnviarPeticion = false;
+          this.successful = false;
+          console.log(e);
+        });
+        setTimeout(() => {
             this.message = "";
             this.mensajeEnviarPeticion = false;
             this.successful = false;
           }, 2000);
-        })
-        .catch(e => {
-          console.log(e);
-        });
     },
 
     aceptarPeticion(peticion) {

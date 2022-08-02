@@ -7,7 +7,7 @@
         class="message"
       >
         <div v-if="message.emisor === usuarioLogueado" class="message propio">
-          <strong  class="message">Yo</strong>
+          <strong  class="message">Eu</strong>
           <br>
           <span class="message">{{ message.mensaje }}</span>
         </div>
@@ -49,7 +49,7 @@ export default {
       return this.input.length > 0;
     },
     usuarioLogueado() {
-      return this.$store.state.auth.user.username;
+      return this.$store.state.auth.user.nome_usuario ;
     },
   },
 };
