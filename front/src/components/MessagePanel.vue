@@ -16,7 +16,6 @@
           <br>
           <span class="message">{{ message.mensaje }}</span>
         </div>
-        
       </li>
     </ul>
 

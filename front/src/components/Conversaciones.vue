@@ -37,7 +37,7 @@
           :key="index"
           @click="iniciarChatUsuario(usuario)"
         >
-          {{ usuario.username }}
+          {{ usuario.nome_usuario }}
         </li>
       </ul>
       <ul v-if="verGrupos" class="list-group">

@@ -77,7 +77,7 @@
             </div>
             <div class="form-group">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-success">Modificar Usuario</button>
+              <button type="submit" class="btn btn-success">Modificar configuración</button>
             </div>
             <div v-if="mostrarError" class="form-group">
               <p class="alert-danger">{{msgAviso}}</p>
@@ -113,8 +113,8 @@ export default {
       UserService.updateUsuario(this.datosUsuario)
         .then(response =>{
           if (response.status < 400) {
-            this.msgAviso = "Grupo Creado";
-            this.$router.go('/profile');
+            this.msgAviso = "ATENCION: Para aplicar os cambios, reinicie sesión";
+            this.mostrarError = true;
 
           } else if (response.status >= 400){
             this.msgAviso = "Ok";
