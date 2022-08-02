@@ -1,5 +1,7 @@
 /**
  * Punto de entrada da aplicación. Neste documento cárganse todas as librerías do proxecto, configúrase o servidor máis o RTC, e continúa a execución.
+ * @author Daniel Gómez Rodriguez
+ *
  */
 // variables de entorno
 require('dotenv').config();
@@ -102,7 +104,7 @@ global.io.on("connection", (socket) => {
   // Lanzase cando un usuario envía unha mensaxe
   socket.on('enviarMensaje', function(datos) {
     /**
-     * Función que devolve true se o parámetro 
+     * Función que devolve true no caso de que o usuario forme parte do grupo
      * @param {*} listaUsuarios 
      * @returns Boolean
      */
@@ -116,7 +118,7 @@ global.io.on("connection", (socket) => {
     };
     global.io.to(datos.sala).emit('emitirMensaje', enviar);
   });
-
+  // Evento de cando un usuario abandona o chat
   socket.on("salirChat", () => {
     socket.disconnect();
   })
@@ -128,7 +130,7 @@ global.io.on("connection", (socket) => {
       }
     }
   });
-
+// Log de cando alguén se desconecta do chat
   socket.on("disconnect", () => {
     console.log('Got disconnect!');
   });
@@ -154,20 +156,13 @@ global.io.on("connection", (socket) => {
   });
 });
 
-// Escuchar en el puerto seleccionado.
+// Escoitar no puerto seleccionado.
 server.listen(port);
-// Capturador de eventos cuando el servidor esté a la espera de conexiones.
+// Capturador de eventos cando o servidor estea á espera de conexions.
 server.on("listening", () => {
-  console.log(`Servidor ejecutandose en puerto: http://localhost:${port}/`)
+  console.log(`Servidor ejecutandose, escuchando a través del puerto: ${port}`)
 });
 
-/*
-// configurar puerto, a la escucha de peticiones
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Servidor ejecutandose en puerto ${PORT}.`);
-});
-*/
 function initial() {
   console.log("configuraciones iniciales finalizadas.");
 }
