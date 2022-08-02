@@ -12,6 +12,10 @@ class GruposService {
     return axios.get(API_URL + grupoId, { headers: authHeader() });
   }
 
+  getGruposPorNombre(nombre) {
+    return axios.get(API_URL, { headers: authHeader(), data: nombre });
+  }
+
   getGrupos() {
     return axios.get(API_URL + 'gruposPertenecientes' , { headers: authHeader() });
   }
