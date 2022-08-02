@@ -120,7 +120,7 @@ exports.getContactosNome = (req, res) => {
       const sinFiltro = contact.contactos;
       const contactos = [];
       sinFiltro.forEach(c => {
-        if (c.username.match(new RegExp(nombre))) {
+        if (c.nome_usuario.match(new RegExp(nombre))) {
           contactos.push(c);
         }
       })  
