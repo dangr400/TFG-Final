@@ -28,7 +28,7 @@
           {{ usuario.nome_usuario }}
         </li>
       </ul>
-      <div class="col-md-6">
+      <div class="col-md">
         <div v-if="currentContacto">
             <h4>Contacto</h4>
             <div>

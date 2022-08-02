@@ -10,17 +10,17 @@
           >
             Enviar
           </button>
-          <div
+        </div>
+        
+      </div>
+    </div>
+    <div
             v-if="message"
-            class="alert"
+            class="container alert"
             :class="successful ? 'alert-success' : 'alert-danger'"
             >
                     {{ message }}
           </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container">
         <h3>
         <strong>Peticións de Contacto</strong>
@@ -35,7 +35,7 @@
           {{ peticion.idEmisor.nome_usuario }}
         </li>
       </ul>
-      <div class="col-md-6">
+      <div class="col-md">
         <div v-if="currentPeticion">
             <h4>Peticion</h4>
             <div>

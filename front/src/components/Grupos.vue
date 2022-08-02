@@ -86,7 +86,7 @@
           {{ grupo.nombre }}
         </li>
       </ul>
-      <div class="col-md-6">
+      <div class="col-md">
         <div v-if="currentGrupo">
             <h4>Grupo</h4>
             <div>
@@ -244,7 +244,7 @@ export default {
     },
     
     searchNombre() {
-      GruposService.getGrupoPorNombre(this.nombre)
+      GruposService.getGruposPorNombre(this.nombre)
         .then(response => {
           this.grupos = response.data.grupos;
           console.log(response.data);
