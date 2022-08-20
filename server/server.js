@@ -74,12 +74,9 @@ require('./app/rutas/grupo.routes')(app);
 require('./app/rutas/salas.routes')(app);
 require('./app/rutas/index.routes')(app);
 
-// capturador de accesos a la API que no existen
+// capturador de accesos ás subpáxinas da API; redirixe o tráfico ao inicio para evitar mensaxes de erro
 app.use('*', (req, res) => {
-  return res.status(404).json({
-    success: false,
-    message: 'No existe la ruta especificada'
-  })
+  res.redirect('/');
 });
 
 // Crear servidor HTTP, cargando a instancia de Express. 
