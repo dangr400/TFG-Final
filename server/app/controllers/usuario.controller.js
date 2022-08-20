@@ -144,14 +144,23 @@ exports.enviarPeticionContacto = (req, res) => {
         fecha: new Date(),
       });
 
-      nuevaPeticion.save((err, peticion) => {
-        if (err) {
-          res.status(500).send({ success: false, message: err});
-          return;
+      Peticion.countDocuments({idEmisor: req.userId, idReceptor: usuarioId}, function (err, count) {
+        if (count > 0) {
+          continuar = false;
+        } else {
+          continuar = true;
         }
-        res.status(200).send({ success: true, message: "Peticion Enviada"});
-      });
-
+      })
+      if (continuar) {
+        nuevaPeticion.save((err, peticion) => {
+          if (err) {
+            res.status(500).send({ success: false, message: err});
+          }
+          res.status(200).send({ success: true, message: "Peticion Enviada"});
+        });
+      } else {
+        res.status(200).send({ success: false, message: "Xa existe unha petición para este usuario"});
+      }
     }).catch(err => {
       res.status(500).send({ message: err});
     })
