@@ -125,7 +125,6 @@ exports.getConversationByRoomId = async (req, res) => {
         limit: parseInt(req.query.limit) || 10,
       };
       const conversation = await Mensajes.getConversationByRoomId(salaId, opciones);
-      console.log(conversation);
       return res.status(200).json({
         success: true,
         conversation,
