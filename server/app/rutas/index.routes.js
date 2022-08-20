@@ -15,7 +15,4 @@ module.exports = function(app) {
       );
       next();
     });
-  
-    app.use('/', express.static(__dirname + '/public'));
-    app.use('/static/docs.pdf', express.static(__dirname + '/public/docs/TFG_DOCUMENTACION.pdf'))
   };
