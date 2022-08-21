@@ -1,26 +1,28 @@
 <template>
   <div>
-    <ul v-if="mensajes" class="messages">
-      <li
-        v-for="(message, index) in mensajes"
-        :key="index"
-        class="message"
-      >
-        <div v-if="message.emisor === usuarioLogueado" class="message propio">
-          <strong  class="message">Eu</strong>
-          <br>
-          <span class="message">{{ message.mensaje }}</span>
-        </div>
-        <div v-else class="message integrante">
-          <strong class="message">{{ message.emisor }}</strong>
-          <br>
-          <span class="message">{{ message.mensaje }}</span>
-        </div>
-      </li>
-    </ul>
-
+    <div class="wrapper">
+      <ul v-if="mensajes" class="messages">
+        <li
+          v-for="(message, index) in mensajes"
+          :key="index"
+          class="message"
+        >
+          <div v-if="message.emisor === usuarioLogueado" class="message propio">
+            <strong  class="message">Eu</strong>
+            <br>
+            <span class="message">{{ message.mensaje }}</span>
+          </div>
+          <div v-else class="message integrante">
+            <strong class="message">{{ message.emisor }}</strong>
+            <br>
+            <span class="message">{{ message.mensaje }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
     <form @submit.prevent="onSubmit" class="form">
-      <textarea v-model="input" placeholder="Your message..." class="input" />
+      <textarea v-model="input" placeholder="Escribir mensaxe..." class="input" />
+      <br>
       <button :disabled="!isValid" class="send-button">Send</button>
     </form>
   </div>
@@ -66,6 +68,13 @@ export default {
   margin: 0;
   padding: 20px;
   background-color: #eff7ff;
+
+}
+.wrapper {
+  position: absolute;
+  height: inherit;
+  width: 40%;
+  overflow: auto;
 }
 .message {
   list-style: none;
@@ -89,6 +98,7 @@ export default {
   padding: 10px;
 }
 .input {
+  margin-top: 50%;
   width: 80%;
   resize: none;
   padding: 10px;
@@ -96,7 +106,18 @@ export default {
   border-radius: 5px;
   border: 1px solid #000;
 }
+@media (max-width: 600px) {
+  .input {
+    margin-top: 150%;
+  }
+}
+@media (max-width: 980px) {
+  .input {
+    margin-top: 100%;
+  }
+}
 .send-button {
   vertical-align: top;
+  width: 20%;
 }
 </style>
