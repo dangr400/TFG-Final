@@ -72,7 +72,7 @@ export default {
 }
 .wrapper {
   position: absolute;
-  height: inherit;
+  height: 40%;
   width: 40%;
   overflow: auto;
 }
@@ -111,9 +111,14 @@ export default {
     margin-top: 150%;
   }
 }
-@media (max-width: 980px) {
+@media (max-width: 990px) {
   .input {
     margin-top: 100%;
+  }
+}
+@media (max-width: 1196px) {
+  .input {
+    margin-top: 70%;
   }
 }
 .send-button {
