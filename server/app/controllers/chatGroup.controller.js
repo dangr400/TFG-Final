@@ -285,13 +285,11 @@ exports.addModeradores = (req, res) => {
     // Se filtran los usuarios que ya estan integrados para evitar duplicados
     const integrantesFiltrado = [];
     req.body.forEach(elemento => {
-      if (!grupo.integrantes.includes(elemento)){
+      if (!grupo.moderadores.includes(elemento)){
         integrantesFiltrado.push(elemento);
       }
     });
-    console.log("Original: " + req.body)
-    console.log("Filtrado: " + integrantesFiltrado)
-    grupo.integrantes = grupo.integrantes.concat(integrantesFiltrado)
+    grupo.moderadores = grupo.moderadores.concat(integrantesFiltrado)
     grupo.save();
     
     return res.status(200).send({ message: "Integrantes añadidos" });
