@@ -111,7 +111,7 @@ global.io.on("connection", (socket) => {
     const usuario = usuariosConectados.find(getNombreSocket);
     const enviar = {
       mensaje: datos.mensaje,
-      emisor: usuario.username,
+      emisor: usuario.nome_usuario,
     };
     global.io.to(datos.sala).emit('emitirMensaje', enviar);
   });
@@ -147,6 +147,7 @@ global.io.on("connection", (socket) => {
         socketId: socket.id,
         username: user.username,
         userId: user.id,
+        persistencia: user.configuracion.persistencia_msgs
       });
       console.log("Nuevo usuario conectado");
     }
