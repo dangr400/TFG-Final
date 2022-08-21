@@ -57,12 +57,13 @@ export default {
         esUsr(usuario){
             return usuario.nome_usuario === this.$store.state.auth.user.nome_usuario
         },
+        // método para introducir o usuario na sala de chat
         getSala(idSala) {
             ChatService.getConversacion(idSala)
             .then(response => {
                 console.log(response);
                 this.users = response.data.users;
-                // formateado de mensajes
+                // recuperar as mensaxes
                 response.data.conversation.forEach(element => {
                     const msg = {
                         emisor: element.origen.nome_usuario,
@@ -112,6 +113,7 @@ export default {
                 emisor: response.emisor});
         });
         this.actualizarUsuarios();
+        socket.emit('enviarMensaje', 'entrou un novo usuario');
         
     },
 

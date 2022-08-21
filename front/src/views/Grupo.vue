@@ -1,7 +1,7 @@
 <template>
     <div class="container">
     <header class="jumbotron">
-      <h3><strong>Detalles del grupo {{this.$route.params.id}}</strong></h3>
+      <h3><strong>Detalles del grupo con ID {{this.$route.params.id}}</strong></h3>
     </header>
     <div class="container">
         <header class="jumbotron">
@@ -74,7 +74,7 @@
                         >
                             {{integrante.nome_usuario}}
                         </option>
-                    </select>
+                      </select>
                     <br>
                     <label class="form-label select-label">Seleccione usuarios</label>
                     <p>{{ listaMods }}</p>
