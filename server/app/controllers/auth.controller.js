@@ -27,10 +27,10 @@ exports.signup = (req, res) => {
   }
   user.save((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
-      return;
+      return res.status(500).send({ message: err });
+      
     }
-    res.status(200).send({ message: "Usuario Registrado"});
+    return res.status(200).send({ message: "Usuario Registrado"});
   });
 };
 
@@ -52,13 +52,11 @@ exports.signin = (req, res) => {
     .exec((err, user) => {
       console.log(user);
       if (err) {
-        res.status(500).send({ message: err });
-        return;
+        return res.status(500).send({ message: err });
       }
       // En caso de no existir dicho usuario, detener comprobación y enviar respuesta
       if (!user) {
-        res.status(404).send({ message: "No existe el usuario." });
-        return;
+        return res.status(404).send({ message: "No existe el usuario." });
       }
       // Si existe, comprobar que la contraseña es correcta
       var passwordIsValid = bcrypt.compareSync(

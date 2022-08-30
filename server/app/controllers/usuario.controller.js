@@ -19,13 +19,12 @@ exports.getEu = (req, res) => {
   User.findById(req.userId)
   .exec((err, user) => {
     if (err) {
-      res.status(500).send({message: "error en el servidor"});
+      return res.status(500).send({message: "error en el servidor"});
     }
     if (!user){
-      res.status(404).send({ message: "No existe el usuario." });
-      return;
+      return res.status(404).send({ message: "No existe el usuario." });
     }
-    res.status(200).json({success: true, user});
+    return res.status(200).json({success: true, user});
   })
 }
 
@@ -35,11 +34,10 @@ exports.getUsuario = (req, res) => {
   User.getUsersByIds(idUsuario)
   .exec((err, usuarios) => {
     if (err) {
-      console.log(err);
-      res.status(500).send({message: "error en el servidor"});
+      return res.status(500).send({message: "error en el servidor"});
     }
     if (usuarios) {
-      res.status(200).send({ success: true, usuarios});
+      return res.status(200).send({ success: true, usuarios});
     }
   });
 }
@@ -47,10 +45,10 @@ exports.getUsuario = (req, res) => {
 exports.actualizarUsuario = (req, res) => {
   User.findByIdAndUpdate(req.body.id, {"configuracion": req.body.configuracion}, function(err, resultado) {
     if (err) {
-      res.status(500).send({message: "error en el servidor"});
+      return res.status(500).send({message: "error en el servidor"});
     }
     else {
-      res.status(200).send({ success: true, message: "actualizado con éxito"});
+      return res.status(200).send({ success: true, message: "actualizado con éxito"});
     }
   })
 }
@@ -69,7 +67,7 @@ exports.getContactos = (req, res) => {
         
       }
       const contactos = contact.contactos;
-      res.status(200).json({success: true, contactos});
+      return res.status(200).json({success: true, contactos});
     });
 }
 
@@ -124,7 +122,7 @@ exports.getContactosNome = (req, res) => {
           contactos.push(c);
         }
       })  
-      res.status(200).json({success: true, contactos});
+      return res.status(200).json({success: true, contactos});
     });
 }
 
@@ -164,18 +162,18 @@ exports.enviarPeticionContacto = (req, res) => {
           if (!esContacto){
             nuevaPeticion.save((err, peticion) => {
               if (err) {
-                res.status(500).send({ success: false, message: err});
+                return res.status(500).send({ success: false, message: err});
               }
-              res.status(200).send({ success: true, message: "Peticion Enviada"});
+              return res.status(200).send({ success: true, message: "Peticion Enviada"});
             });
-          } else res.status(406).send({success: true, message: "Xa é contacto, non se envia peticion"});
+          } else return res.status(406).send({success: true, message: "Xa é contacto, non se envia peticion"});
         });
         
       } else {
-        res.status(200).send({ success: true, message: "Xa existe unha petición para este usuario"});
+        return res.status(200).send({ success: true, message: "Xa existe unha petición para este usuario"});
       }
     }).catch(err => {
-      res.status(500).send({ message: err});
+      return res.status(500).send({ message: err});
     })
 }
 
@@ -196,11 +194,10 @@ exports.aceptarPeticion = (req, res) => {
     usuario1.save();
     usuario2.save();
     peticion.delete();
-    res.status(200).send({ success: true, message: "Contacto añadido"});
+    return res.status(200).send({ success: true, message: "Contacto añadido"});
   }).catch((error) => {
     console.log(error);
-    res.status(500).send({ success: false, message: "Hubo un error en el proceso"});
-    return;
+    return res.status(500).send({ success: false, message: "Hubo un error en el proceso"});
   });
 }
 
@@ -214,10 +211,9 @@ exports.cancelarPeticion =(req, res) => {
   Peticion.findByIdAndDelete(req.body.peticion._id)
   .exec((err) => {
     if (err) {
-      res.status(500).send({ success: true, message: err});
-      return;
+      return res.status(500).send({ success: true, message: err});
     }
-    res.status(200).send({ success: true, message: "peticion cancelada"});
+    return res.status(200).send({ success: true, message: "peticion cancelada"});
   })
 
 }
@@ -233,10 +229,9 @@ exports.verPeticions = (req, res) => {
   .populate("idReceptor")
   .exec((err, peticiones) =>{
     if (err) {
-      res.status(500).send({ message: err});
-      return;
+      return res.status(500).send({ message: err});
     }
-    res.status(200).json({success:true, peticiones});
+    return res.status(200).json({success:true, peticiones});
   })
 }
 
@@ -252,10 +247,9 @@ exports.verPeticionsPendentes = (req, res) => {
   .exec((err, peticiones) =>{
     if (err) {
       console.log(err);
-      res.status(500).send({ message: err});
-      return;
+      return res.status(500).send({ message: err});
     }
-    res.status(200).json({success:true, peticiones});
+    return res.status(200).json({success:true, peticiones});
   })
 }
 
@@ -269,10 +263,9 @@ exports.getGrupos = (req, res) => {
   Grupos.find({creador: req.userId})
   .exec((err, grupos) => {
     if (err) {
-      res.status(500).send({ message: "grupos no encontrados"});
-      return;
+      return res.status(500).send({ message: "grupos no encontrados"});
     }
-    res.status(200).send(grupos);
+    return res.status(200).send(grupos);
   });
 }
 
@@ -286,9 +279,8 @@ exports.eliminarUsuario = (req, res) => {
   User.findByIdAndDelete(req.userId)
   .exec((err, exito) =>{
     if (err) {
-      res.status(500).send({ message: "No se pudo eliminar"});
-      return;
+      return res.status(500).send({ message: "No se pudo eliminar"});
     }
-    res.status(200).send({ message: "usuario eliminado"});
+    return res.status(200).send({ message: "usuario eliminado"});
   })
 }

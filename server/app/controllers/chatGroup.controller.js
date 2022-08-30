@@ -24,11 +24,9 @@ exports.crearGrupo = (req, res) => {
       });
     grupo.save((err) => {
         if (err) {
-          res.status(500).send({ message: "Problema coa conexión, probe nun rato." });
-          return;
+          return res.status(500).send({ message: "Problema coa conexión, probe nun rato." });
         }
-        res.send({ message: "Grupo creado!" });
-        return;
+        return res.status(200).send({ message: "Grupo creado!" });
     });
 };
 
@@ -40,15 +38,12 @@ exports.getGrupoPorId = (req, res) => {
   .exec((err, grupo) => {
     if (err) {
       console.log(err);
-      res.status(500).send({success: false, message: "error en el servidor"});
-      return;
+      return res.status(500).send({success: false, message: "error en el servidor"});
     }
     if (!grupo){
-      res.status(404).send({success: false, message: "no existe el grupo"});
-      return;
+      return res.status(404).send({success: false, message: "no existe el grupo"});
     }
-    res.status(200).send({success: true, grupo});
-    return;
+    return res.status(200).send({success: true, grupo});
   })
 }
 
@@ -56,26 +51,24 @@ exports.permisosGrupo = (req, res) => {
   Grupo.find({_id: req.params.grupoId , creador: req.userId})
   .exec((err, grupo) => {
     if (err) {
-      res.status(404).send({success: false})
-      return;
+      return res.status(404).send({success: false})
     }
     if (grupo){
-      res.status(200).send({success: true , esCreador: true , esModerador: true})
-      return;
+      return res.status(200).send({success: true , esCreador: true , esModerador: true})
+
     }
     else{
       Grupo.find({_id: req.params.grupoId, moderador: req.userId })
       .exec(
         (err, grupo) => {
           if (err) {
-            res.status(404).send({success: false})
-            return;
+            return res.status(404).send({success: false})
           }
           if (grupo){
-            res.status(200).send({success: true , esCreador: false , esModerador: true})
-            return;
+            return res.status(200).send({success: true , esCreador: false , esModerador: true})
+            
           }
-            res.status(404).send({success: false, esCreador: false, esModerador: false})
+          return res.status(404).send({success: false, esCreador: false, esModerador: false})
         })
     }
     
@@ -97,10 +90,9 @@ exports.nuevoMensaje = (req, res) => {
   });
   mensaje.save((err) => {
     if (err) {
-      res.status(500).send({ message: err});
-      return;
+      return res.status(500).send({ message: err});
     }
-    res.status(200).send({ message: "Mensaje Guardado"});
+    return res.status(200).send({ message: "Mensaje Guardado"});
   })
 };
 
@@ -114,11 +106,9 @@ exports.verMensajes = (req, res) => {
   Mensaje.find({destino: req.body.grupoId})
   .exec((err, msgs) => {
     if (err) {
-      res.status(500).send({ message: err});
-      return;
+      return res.status(500).send({ message: err});
     }
-    res.status(200).send(msgs);
-    return;
+    return res.status(200).send(msgs);
   })
 };
 
@@ -132,11 +122,9 @@ exports.eliminarGrupo = (req, res) => {
   Grupo.findByIdAndDelete(req.body.grupoId)
   .exec((err) => {
     if (err) {
-      res.status(500).send({ message: err});
-      return;
+      return res.status(500).send({ message: err});
     }
-    res.status(200).send({ message: "grupo eliminado"});
-    return;
+    return res.status(200).send({ message: "grupo eliminado"});
   });
 };
 
@@ -150,11 +138,9 @@ exports.misGrupos = (req, res) => {
   Grupo.find({creador: req.userId})
   .exec((err, grupos) => {
     if (err) {
-      res.status(500).send({ message: err});
-      return;
+      return res.status(500).send({ message: err});
     }
-    res.status(200).send(grupos);
-    return;
+    return res.status(200).send(grupos);
   })
 };
 
@@ -169,11 +155,10 @@ exports.integranteEnGrupos = (req, res) => {
   .exec((err, grupos) => {
     if (err) {
       console.log(err);
-      res.status(500).send({ message: err});
-      return;
+      return res.status(500).send({ message: err});
     }
-    res.status(200).send(grupos);
-    return;
+    return res.status(200).send(grupos);
+
   });
 };
 
@@ -187,11 +172,9 @@ exports.moderadorEnGrupos = (req, res) => {
   Grupo.find({moderadores: req.userId})
   .exec((err, grupos) => {
     if (err) {
-      res.status(500).send({ message: err});
-      return;
+      return res.status(500).send({ message: err});
     }
-    res.status(200).send(grupos);
-    return;
+    return res.status(200).send(grupos);
   });
 };
 
@@ -205,11 +188,9 @@ exports.gruposPublicos = (req, res) => {
   Grupo.find({publico: true})
   .exec((err, grupos) => {
     if (err) {
-      res.status(500).send({ message: err});
-      return;
+      return res.status(500).send({ message: err});
     }
-    res.status(200).send(grupos);
-    return;
+    return res.status(200).send(grupos);
   });
 };
 
@@ -223,8 +204,7 @@ exports.agregarUsuario = (req, res) => {
     Grupo.findById(req.body.grupoId)
     .exec((err, grupo) => {
       if (err) {
-        res.status(500).send({ message: err });
-      return;
+        return res.status(500).send({ message: err });
       }
       if (!grupo) {
         return res.status(404).send({ message: "Grupo no encontrado." });
@@ -232,12 +212,10 @@ exports.agregarUsuario = (req, res) => {
       Usuario.findById(req.body.usuarioId)
       .exec((err,user) => {
         if (err) {
-          res.status(500).send({ message: err });
-          return;
+          return res.status(500).send({ message: err });
         }
         if (!user) {
-          res.status(404).send({ message: "Usuario no encontrado." });
-          return;
+          return res.status(404).send({ message: "Usuario no encontrado." });
         }
         grupo.integrantes.push(user._id);
         grupo.save();
@@ -250,8 +228,7 @@ exports.addIntegrantes = (req, res) => {
   Grupo.findById(req.params.id)
   .exec((err, grupo) => {
     if (err) {
-      res.status(500).send({ message: err });
-    return;
+      return res.status(500).send({ message: err });
     }
     if (!grupo) {
       return res.status(404).send({ message: "Grupo no encontrado." });
@@ -276,8 +253,7 @@ exports.addModeradores = (req, res) => {
   Grupo.findById(req.params.id)
   .exec((err, grupo) => {
     if (err) {
-      res.status(500).send({ message: err });
-    return;
+      return res.status(500).send({ message: err });
     }
     if (!grupo) {
       return res.status(404).send({ message: "Grupo no encontrado." });
