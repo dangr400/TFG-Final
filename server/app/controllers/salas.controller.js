@@ -148,7 +148,7 @@ exports.markConversationReadByRoomId = async (req, res) => {
       if (!room) {
         return res.status(400).json({
           success: false,
-          message: 'No existe una sala con este id',
+          message: 'Non existe unha sala con este id',
         })
       }
 
@@ -168,7 +168,7 @@ exports.entrarConversacion = async (req, res) => {
     if (!sala) {
       return res.status(400).json({
         success: false,
-        message: 'No room exists for this id',
+        message: 'Non existe unha sala con este id',
       })
     }
 
@@ -189,7 +189,7 @@ exports.salirConversacion = async (req, res) => {
     if (!sala) {
       return res.status(400).json({
         success: false,
-        message: 'No room exists for this id',
+        message: 'Non existe unha sala con este id',
       })
     }
 
