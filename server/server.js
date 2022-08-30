@@ -119,17 +119,15 @@ global.io.on("connection", (socket) => {
   socket.on("salirChat", () => {
     socket.disconnect();
   })
-  // borrar usuario del registro
-  socket.on("disconnecting", () => {
+  
+  // Execútase cando alguén se desconecta do chat
+  socket.on("disconnect", () => {
+    console.log('Got disconnect!');
     for (var i = usuariosConectados.length - 1; i >= 0; --i) {
       if (usuariosConectados[i].socketId == socket.id) {
           usuariosConectados.splice(i,1);
       }
     }
-  });
-// Log de cando alguén se desconecta do chat
-  socket.on("disconnect", () => {
-    console.log('Got disconnect!');
   });
 
   // añadir identidad del usuario mapeado al socket id

@@ -55,7 +55,7 @@ export default {
     },
     methods: {
         esUsr(usuario){
-            return usuario.nome_usuario === this.$store.state.auth.user.nome_usuario
+            return usuario.nome_usuario === this.$store.state.auth.user.username
         },
         // método para introducir o usuario na sala de chat
         getSala(idSala) {

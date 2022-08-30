@@ -51,7 +51,7 @@ export default {
       return this.input.length > 0;
     },
     usuarioLogueado() {
-      return this.$store.state.auth.user.nome_usuario ;
+      return this.$store.state.auth.user.username ;
     },
   },
 };
