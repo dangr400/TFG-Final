@@ -111,7 +111,7 @@ global.io.on("connection", (socket) => {
     const usuario = usuariosConectados.find(getNombreSocket);
     const enviar = {
       mensaje: datos.mensaje,
-      emisor: usuario.nome_usuario,
+      emisor: usuario.username,
     };
     global.io.to(datos.sala).emit('emitirMensaje', enviar);
   });
