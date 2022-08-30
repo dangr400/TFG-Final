@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkfront"]=self["webpackChunkfront"]||[]).push([[429],{3429:function(n,r,t){t.r(r),t.d(r,{default:function(){return a}});var u=t(6252);const e=(0,u._)("h1",null," 404: NO EXISTE LA DIRECCION ",-1),c=[e];function f(n,r){return(0,u.wg)(),(0,u.iD)("div",null,c)}var l=t(3744);const o={},s=(0,l.Z)(o,[["render",f]]);var a=s}}]);
+//# sourceMappingURL=429.65b2d835.js.map

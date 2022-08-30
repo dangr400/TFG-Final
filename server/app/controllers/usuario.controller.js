@@ -143,8 +143,8 @@ exports.enviarPeticionContacto = (req, res) => {
         estado: "PENDIENTE",
         fecha: new Date(),
       });
-
-      Peticion.countDocuments({idEmisor: req.userId, idReceptor: usuarioId}, function (err, count) {
+      // Comprobar que non existe xa unha petición
+      Peticion.countDocuments({idEmisor: req.userId, idReceptor: nuevaPeticion.idReceptor}, function (err, count) {
         if (count > 0) {
           continuar = false;
         } else {
@@ -152,14 +152,27 @@ exports.enviarPeticionContacto = (req, res) => {
         }
       })
       if (continuar) {
-        nuevaPeticion.save((err, peticion) => {
-          if (err) {
-            res.status(500).send({ success: false, message: err});
+        // Comprobar que non son contactos
+        User.getUserById(req.userId)
+        .then(usuInit =>{
+          var esContacto = false;
+          var existe = usuInit[0].contactos.includes(usuarioId);
+          if (existe){
+            esContacto = true;
           }
-          res.status(200).send({ success: true, message: "Peticion Enviada"});
+          // Se non existe a peticion e non son contactos, agregar peticion
+          if (!esContacto){
+            nuevaPeticion.save((err, peticion) => {
+              if (err) {
+                res.status(500).send({ success: false, message: err});
+              }
+              res.status(200).send({ success: true, message: "Peticion Enviada"});
+            });
+          } else res.status(406).send({success: true, message: "Xa é contacto, non se envia peticion"});
         });
+        
       } else {
-        res.status(200).send({ success: false, message: "Xa existe unha petición para este usuario"});
+        res.status(200).send({ success: true, message: "Xa existe unha petición para este usuario"});
       }
     }).catch(err => {
       res.status(500).send({ message: err});
