@@ -59,8 +59,8 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Crear Grupo</button>
                   </div>
-                  <div v-if="mostrarError" class="form-group">
-                    <h3 class="danger alert-danger">{{msgError}}</h3>
+                  <div v-if="mostrarAviso" class="form-group">
+                    <h3 class="danger alert-danger">{{msgAviso}}</h3>
                   </div>
                 </Form>
                 
@@ -153,8 +153,8 @@ export default {
     });
 
     return {
-      mostrarError: false,
-      msgError: null,
+      mostrarAviso: false,
+      msgAviso: null,
       grupos: [],
       currentGrupo: null,
       currentIndex: -1,
@@ -175,10 +175,11 @@ export default {
       GruposService.nuevoGrupo(this.nuevoGrupo)
         .then(response => {
           if (response.status < 400) {
-            this.msgError = "Grupo Creado";
-            
+            this.mostrarAviso = true;
+            this.msgAviso = "Grupo Creado";
+            this.refreshList();
           } else if (response.status >= 400){
-            this.msgError = response.data;
+            this.msgAviso = response.data;
           }
         })
         .catch(e => {
